@@ -1,0 +1,369 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC3584CF15BBF40300FE92D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3584CE15BBF40300FE92D3 /* UIKit.framework */; };
+		DC3584D115BBF40300FE92D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3584D015BBF40300FE92D3 /* Foundation.framework */; };
+		DC3584D315BBF40300FE92D3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3584D215BBF40300FE92D3 /* CoreGraphics.framework */; };
+		DC3584D915BBF40300FE92D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC3584D715BBF40300FE92D3 /* InfoPlist.strings */; };
+		DC3584DB15BBF40300FE92D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3584DA15BBF40300FE92D3 /* main.m */; };
+		DC3584DF15BBF40300FE92D3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3584DE15BBF40300FE92D3 /* AppDelegate.m */; };
+		DC3584EC15BBF4BF00FE92D3 /* SOSideMenusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3584EB15BBF4BF00FE92D3 /* SOSideMenusViewController.m */; };
+		DC3584F915BBF7D200FE92D3 /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3584F015BBF7D200FE92D3 /* BaseController.m */; };
+		DC3584FA15BBF7D200FE92D3 /* ControllerA.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3584F215BBF7D200FE92D3 /* ControllerA.m */; };
+		DC3584FB15BBF7D200FE92D3 /* LeftSideTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3584F415BBF7D200FE92D3 /* LeftSideTestController.m */; };
+		DC3584FC15BBF7D200FE92D3 /* LeftSideTestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC3584F515BBF7D200FE92D3 /* LeftSideTestController.xib */; };
+		DC3584FD15BBF7D200FE92D3 /* VerticalTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3584F715BBF7D200FE92D3 /* VerticalTestController.m */; };
+		DC3584FE15BBF7D200FE92D3 /* VerticalTestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC3584F815BBF7D200FE92D3 /* VerticalTestController.xib */; };
+		DC35850115BBF87200FE92D3 /* ControllerB.m in Sources */ = {isa = PBXBuildFile; fileRef = DC35850015BBF87200FE92D3 /* ControllerB.m */; };
+		DC35850B15BC00D100FE92D3 /* corner-bottom-left.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850315BC00D100FE92D3 /* corner-bottom-left.png */; };
+		DC35850C15BC00D100FE92D3 /* corner-bottom-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850415BC00D100FE92D3 /* corner-bottom-left@2x.png */; };
+		DC35850D15BC00D100FE92D3 /* corner-bottom-right.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850515BC00D100FE92D3 /* corner-bottom-right.png */; };
+		DC35850E15BC00D100FE92D3 /* corner-bottom-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850615BC00D100FE92D3 /* corner-bottom-right@2x.png */; };
+		DC35850F15BC00D100FE92D3 /* corner-top-left.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850715BC00D100FE92D3 /* corner-top-left.png */; };
+		DC35851015BC00D100FE92D3 /* corner-top-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850815BC00D100FE92D3 /* corner-top-left@2x.png */; };
+		DC35851115BC00D100FE92D3 /* corner-top-right.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850915BC00D100FE92D3 /* corner-top-right.png */; };
+		DC35851215BC00D100FE92D3 /* corner-top-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850A15BC00D100FE92D3 /* corner-top-right@2x.png */; };
+		DC35851F15BC075900FE92D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DC35851E15BC075900FE92D3 /* README.md */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DC3584CA15BBF40300FE92D3 /* SOSideMenusController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SOSideMenusController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC3584CE15BBF40300FE92D3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DC3584D015BBF40300FE92D3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DC3584D215BBF40300FE92D3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DC3584D615BBF40300FE92D3 /* SOSideMenusController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SOSideMenusController-Info.plist"; sourceTree = "<group>"; };
+		DC3584D815BBF40300FE92D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DC3584DA15BBF40300FE92D3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DC3584DC15BBF40300FE92D3 /* SOSideMenusController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SOSideMenusController-Prefix.pch"; sourceTree = "<group>"; };
+		DC3584DD15BBF40300FE92D3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DC3584DE15BBF40300FE92D3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DC3584EA15BBF4BF00FE92D3 /* SOSideMenusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSideMenusViewController.h; sourceTree = "<group>"; };
+		DC3584EB15BBF4BF00FE92D3 /* SOSideMenusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSideMenusViewController.m; sourceTree = "<group>"; };
+		DC3584EF15BBF7D200FE92D3 /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
+		DC3584F015BBF7D200FE92D3 /* BaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseController.m; sourceTree = "<group>"; };
+		DC3584F115BBF7D200FE92D3 /* ControllerA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerA.h; sourceTree = "<group>"; };
+		DC3584F215BBF7D200FE92D3 /* ControllerA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControllerA.m; sourceTree = "<group>"; };
+		DC3584F315BBF7D200FE92D3 /* LeftSideTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSideTestController.h; sourceTree = "<group>"; };
+		DC3584F415BBF7D200FE92D3 /* LeftSideTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSideTestController.m; sourceTree = "<group>"; };
+		DC3584F515BBF7D200FE92D3 /* LeftSideTestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftSideTestController.xib; sourceTree = "<group>"; };
+		DC3584F615BBF7D200FE92D3 /* VerticalTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalTestController.h; sourceTree = "<group>"; };
+		DC3584F715BBF7D200FE92D3 /* VerticalTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalTestController.m; sourceTree = "<group>"; };
+		DC3584F815BBF7D200FE92D3 /* VerticalTestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerticalTestController.xib; sourceTree = "<group>"; };
+		DC3584FF15BBF87200FE92D3 /* ControllerB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerB.h; sourceTree = "<group>"; };
+		DC35850015BBF87200FE92D3 /* ControllerB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControllerB.m; sourceTree = "<group>"; };
+		DC35850315BC00D100FE92D3 /* corner-bottom-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner-bottom-left.png"; sourceTree = "<group>"; };
+		DC35850415BC00D100FE92D3 /* corner-bottom-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner-bottom-left@2x.png"; sourceTree = "<group>"; };
+		DC35850515BC00D100FE92D3 /* corner-bottom-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner-bottom-right.png"; sourceTree = "<group>"; };
+		DC35850615BC00D100FE92D3 /* corner-bottom-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner-bottom-right@2x.png"; sourceTree = "<group>"; };
+		DC35850715BC00D100FE92D3 /* corner-top-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner-top-left.png"; sourceTree = "<group>"; };
+		DC35850815BC00D100FE92D3 /* corner-top-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner-top-left@2x.png"; sourceTree = "<group>"; };
+		DC35850915BC00D100FE92D3 /* corner-top-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner-top-right.png"; sourceTree = "<group>"; };
+		DC35850A15BC00D100FE92D3 /* corner-top-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner-top-right@2x.png"; sourceTree = "<group>"; };
+		DC35851E15BC075900FE92D3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC3584C715BBF40300FE92D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3584CF15BBF40300FE92D3 /* UIKit.framework in Frameworks */,
+				DC3584D115BBF40300FE92D3 /* Foundation.framework in Frameworks */,
+				DC3584D315BBF40300FE92D3 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC3584BF15BBF40200FE92D3 = {
+			isa = PBXGroup;
+			children = (
+				DC35851E15BC075900FE92D3 /* README.md */,
+				DC3584D415BBF40300FE92D3 /* SOSideMenusController */,
+				DC3584CD15BBF40300FE92D3 /* Frameworks */,
+				DC3584CB15BBF40300FE92D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC3584CB15BBF40300FE92D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC3584CA15BBF40300FE92D3 /* SOSideMenusController.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC3584CD15BBF40300FE92D3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC3584CE15BBF40300FE92D3 /* UIKit.framework */,
+				DC3584D015BBF40300FE92D3 /* Foundation.framework */,
+				DC3584D215BBF40300FE92D3 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC3584D415BBF40300FE92D3 /* SOSideMenusController */ = {
+			isa = PBXGroup;
+			children = (
+				DC3584DD15BBF40300FE92D3 /* AppDelegate.h */,
+				DC3584DE15BBF40300FE92D3 /* AppDelegate.m */,
+				DC3584E915BBF4BF00FE92D3 /* SOSideMenusViewController */,
+				DC3584D515BBF40300FE92D3 /* Supporting Files */,
+			);
+			path = SOSideMenusController;
+			sourceTree = "<group>";
+		};
+		DC3584D515BBF40300FE92D3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC3584EE15BBF7D200FE92D3 /* TestControllers */,
+				DC3584D615BBF40300FE92D3 /* SOSideMenusController-Info.plist */,
+				DC3584D715BBF40300FE92D3 /* InfoPlist.strings */,
+				DC3584DA15BBF40300FE92D3 /* main.m */,
+				DC3584DC15BBF40300FE92D3 /* SOSideMenusController-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC3584E915BBF4BF00FE92D3 /* SOSideMenusViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DC3584EA15BBF4BF00FE92D3 /* SOSideMenusViewController.h */,
+				DC3584EB15BBF4BF00FE92D3 /* SOSideMenusViewController.m */,
+				DC35850215BC00D100FE92D3 /* rounded_corner_images */,
+			);
+			path = SOSideMenusViewController;
+			sourceTree = "<group>";
+		};
+		DC3584EE15BBF7D200FE92D3 /* TestControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DC3584EF15BBF7D200FE92D3 /* BaseController.h */,
+				DC3584F015BBF7D200FE92D3 /* BaseController.m */,
+				DC3584F115BBF7D200FE92D3 /* ControllerA.h */,
+				DC3584F215BBF7D200FE92D3 /* ControllerA.m */,
+				DC3584FF15BBF87200FE92D3 /* ControllerB.h */,
+				DC35850015BBF87200FE92D3 /* ControllerB.m */,
+				DC3584F315BBF7D200FE92D3 /* LeftSideTestController.h */,
+				DC3584F415BBF7D200FE92D3 /* LeftSideTestController.m */,
+				DC3584F515BBF7D200FE92D3 /* LeftSideTestController.xib */,
+				DC3584F615BBF7D200FE92D3 /* VerticalTestController.h */,
+				DC3584F715BBF7D200FE92D3 /* VerticalTestController.m */,
+				DC3584F815BBF7D200FE92D3 /* VerticalTestController.xib */,
+			);
+			path = TestControllers;
+			sourceTree = "<group>";
+		};
+		DC35850215BC00D100FE92D3 /* rounded_corner_images */ = {
+			isa = PBXGroup;
+			children = (
+				DC35850315BC00D100FE92D3 /* corner-bottom-left.png */,
+				DC35850415BC00D100FE92D3 /* corner-bottom-left@2x.png */,
+				DC35850515BC00D100FE92D3 /* corner-bottom-right.png */,
+				DC35850615BC00D100FE92D3 /* corner-bottom-right@2x.png */,
+				DC35850715BC00D100FE92D3 /* corner-top-left.png */,
+				DC35850815BC00D100FE92D3 /* corner-top-left@2x.png */,
+				DC35850915BC00D100FE92D3 /* corner-top-right.png */,
+				DC35850A15BC00D100FE92D3 /* corner-top-right@2x.png */,
+			);
+			path = rounded_corner_images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC3584C915BBF40300FE92D3 /* SOSideMenusController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC3584E215BBF40300FE92D3 /* Build configuration list for PBXNativeTarget "SOSideMenusController" */;
+			buildPhases = (
+				DC3584C615BBF40300FE92D3 /* Sources */,
+				DC3584C715BBF40300FE92D3 /* Frameworks */,
+				DC3584C815BBF40300FE92D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SOSideMenusController;
+			productName = SOSideMenusController;
+			productReference = DC3584CA15BBF40300FE92D3 /* SOSideMenusController.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC3584C115BBF40200FE92D3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Stephen O'Connor";
+			};
+			buildConfigurationList = DC3584C415BBF40200FE92D3 /* Build configuration list for PBXProject "SOSideMenusController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DC3584BF15BBF40200FE92D3;
+			productRefGroup = DC3584CB15BBF40300FE92D3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC3584C915BBF40300FE92D3 /* SOSideMenusController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DC3584C815BBF40300FE92D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3584D915BBF40300FE92D3 /* InfoPlist.strings in Resources */,
+				DC3584FC15BBF7D200FE92D3 /* LeftSideTestController.xib in Resources */,
+				DC3584FE15BBF7D200FE92D3 /* VerticalTestController.xib in Resources */,
+				DC35850B15BC00D100FE92D3 /* corner-bottom-left.png in Resources */,
+				DC35850C15BC00D100FE92D3 /* corner-bottom-left@2x.png in Resources */,
+				DC35850D15BC00D100FE92D3 /* corner-bottom-right.png in Resources */,
+				DC35850E15BC00D100FE92D3 /* corner-bottom-right@2x.png in Resources */,
+				DC35850F15BC00D100FE92D3 /* corner-top-left.png in Resources */,
+				DC35851015BC00D100FE92D3 /* corner-top-left@2x.png in Resources */,
+				DC35851115BC00D100FE92D3 /* corner-top-right.png in Resources */,
+				DC35851215BC00D100FE92D3 /* corner-top-right@2x.png in Resources */,
+				DC35851F15BC075900FE92D3 /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC3584C615BBF40300FE92D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3584DB15BBF40300FE92D3 /* main.m in Sources */,
+				DC3584DF15BBF40300FE92D3 /* AppDelegate.m in Sources */,
+				DC3584EC15BBF4BF00FE92D3 /* SOSideMenusViewController.m in Sources */,
+				DC3584F915BBF7D200FE92D3 /* BaseController.m in Sources */,
+				DC3584FA15BBF7D200FE92D3 /* ControllerA.m in Sources */,
+				DC3584FB15BBF7D200FE92D3 /* LeftSideTestController.m in Sources */,
+				DC3584FD15BBF7D200FE92D3 /* VerticalTestController.m in Sources */,
+				DC35850115BBF87200FE92D3 /* ControllerB.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DC3584D715BBF40300FE92D3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC3584D815BBF40300FE92D3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DC3584E015BBF40300FE92D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DC3584E115BBF40300FE92D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DC3584E315BBF40300FE92D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOSideMenusController/SOSideMenusController-Prefix.pch";
+				INFOPLIST_FILE = "SOSideMenusController/SOSideMenusController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DC3584E415BBF40300FE92D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOSideMenusController/SOSideMenusController-Prefix.pch";
+				INFOPLIST_FILE = "SOSideMenusController/SOSideMenusController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC3584C415BBF40200FE92D3 /* Build configuration list for PBXProject "SOSideMenusController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC3584E015BBF40300FE92D3 /* Debug */,
+				DC3584E115BBF40300FE92D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC3584E215BBF40300FE92D3 /* Build configuration list for PBXNativeTarget "SOSideMenusController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC3584E315BBF40300FE92D3 /* Debug */,
+				DC3584E415BBF40300FE92D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC3584C115BBF40200FE92D3 /* Project object */;
+}
