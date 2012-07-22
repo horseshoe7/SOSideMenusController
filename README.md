@@ -1,6 +1,5 @@
 # SOSideMenusController
 
-
 A flexible, generic, side menus view controller with a powerfully simple API, similar to the Facebook and Path 2.0 Apps
 
 ## Yes, another Facebook-style side menus controller.  It's the API that makes it unique.
@@ -77,3 +76,13 @@ I wanted to make a very simple API that made plain english desires an easy task:
 @end
 ```
 
+## Known Issues
+
+ * The top-bottom functionality may need some further work.  I wrote this initially for left-right, and recently extended it if you want to use top-bottom for internal messaging / help, but swiping up-down was not implemented as this would most likely conflict with table views and scroll views.
+
+## Feedback
+
+Is always welcome!  Feel free to create a github issue.
+
+Thanks
+Stephen O'Connor
