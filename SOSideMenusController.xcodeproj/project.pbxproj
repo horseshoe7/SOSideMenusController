@@ -29,7 +29,6 @@
 		DC35851015BC00D100FE92D3 /* corner-top-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850815BC00D100FE92D3 /* corner-top-left@2x.png */; };
 		DC35851115BC00D100FE92D3 /* corner-top-right.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850915BC00D100FE92D3 /* corner-top-right.png */; };
 		DC35851215BC00D100FE92D3 /* corner-top-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC35850A15BC00D100FE92D3 /* corner-top-right@2x.png */; };
-		DC35851F15BC075900FE92D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DC35851E15BC075900FE92D3 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -239,7 +238,6 @@
 				DC35851015BC00D100FE92D3 /* corner-top-left@2x.png in Resources */,
 				DC35851115BC00D100FE92D3 /* corner-top-right.png in Resources */,
 				DC35851215BC00D100FE92D3 /* corner-top-right@2x.png in Resources */,
-				DC35851F15BC075900FE92D3 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
