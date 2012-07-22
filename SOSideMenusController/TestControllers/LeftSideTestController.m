@@ -74,11 +74,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    SOSideMenusViewController *parent = (SOSideMenusViewController*)[self parentViewController];
-    
     BaseController *newController;
     
-    if ([[(UINavigationController*) parent.mainController topViewController] isKindOfClass:[ControllerA class]]) {
+    if ([[(UINavigationController*) self.sideMenuController.mainController topViewController] isKindOfClass:[ControllerA class]]) {
         newController = [[ControllerB alloc] init];
     }
     else
@@ -86,7 +84,14 @@
         newController = [[ControllerA alloc] init];
     }
     
-    [(UINavigationController*)parent.mainController pushViewController:newController animated:YES];
+    [(UINavigationController*)self.sideMenuController.mainController pushViewController:newController animated:YES];
+    
+    [self.sideMenuController showMainControllerWithCompletionBlock:^(SOSideMenusViewController *controller, ViewingPage fromPage, ViewingPage toPage) {
+            
+        
+    }];
+    
+    
     
         
 }
