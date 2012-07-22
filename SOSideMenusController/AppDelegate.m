@@ -21,6 +21,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     SOSideMenusViewController *appController = [[SOSideMenusViewController alloc] initWithMainController:[[UINavigationController alloc] init]];
+    appController.view.backgroundColor = [UIColor darkGrayColor];
     
     self.window.rootViewController = appController;
 
