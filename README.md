@@ -76,6 +76,24 @@ I wanted to make a very simple API that made plain english desires an easy task:
 @end
 ```
 
+## Summary
+ 
+ This is a container view controller which would make a good foundation for an application controller in your app.  
+ 
+ Once initialized with a main controller (typically a UINavigationController), you can use pan/swipe gestures to slide the main controller left or right to reveal a side menu controller (you have to set that property first).
+ 
+ This class was designed for left-right pan/swipe, and was extended for top-bottom controllers, but the intention there was to use those for things like notifications and so there is no pan-swipe functionality there, as that may have also introduced some complexity when dealing with tableviews or scrollviews.
+ 
+## Installation and Usage
+ 
+ - Just import this class' containing folder with the .h/.m and the rounded_corner_overlays folder if you want to use rounded corners on your mainController.
+ 
+ - Initialize the object with a mainController.  Then assign any one of the top/left/bottom/rightController objects.  It will figure out how to set up the side menus based on that view controller's view size.
+ 
+ - you can explicitly show the side controllers (if they exist and have been assigned to that property) with show...Controller... methods.
+ 
+ - you can disable being able to pan/swipe to a controller (without having to set him to nil) by using the BOOL properties canView...Controller.  It's a nice way to temporarily disable using the side menus.
+
 ## Known Issues
 
  * The top-bottom functionality may need some further work.  I wrote this initially for left-right, and recently extended it if you want to use top-bottom for internal messaging / help, but swiping up-down was not implemented as this would most likely conflict with table views and scroll views.
