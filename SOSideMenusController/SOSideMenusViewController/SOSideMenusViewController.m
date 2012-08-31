@@ -179,6 +179,8 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     BOOL _usesRoundedCorners;
     
     CGFloat _leftControllerWidth, _rightControllerWidth, _topControllerHeight, _bottomControllerHeight;
+    
+    
 }
 
 - (void)handlePan:(UIPanGestureRecognizer*)aRecognizer;
@@ -233,45 +235,17 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         _mainController = theMainController;
         [_mainController willMoveToParentViewController: self];
         [self addChildViewController:_mainController];
-        [self.view addSubview: _mainController.view];
-        _mainController.view.frame = self.view.bounds;
-        _mainController.view.clipsToBounds = NO;
         
-        _usesRoundedCorners = NO;
-        self.usesRoundedCorners = YES;
         
-
+        
+        _unloadedFrameTop = CGRectZero, _unloadedFrameBottom = CGRectZero, _unloadedFrameLeft = CGRectZero, _unloadedFrameRight = CGRectZero;
 
                 
         self.elasticity = 100.0f;
         
         [_mainController didMoveToParentViewController: self];
 
-        panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        panGesture.delegate = self;
-        [self.view addGestureRecognizer:panGesture];
         
-        leftSwipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-        leftSwipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
-        leftSwipeGesture.delegate = self;
-
-        rightSwipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-        rightSwipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-        rightSwipeGesture.delegate = self;
-
-        
-        [self.view addGestureRecognizer:leftSwipeGesture];
-        [self.view addGestureRecognizer:rightSwipeGesture];
-
-        
-        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(tappedMainView:)];
-        tapGesture.delegate = self;
-        tapGesture.numberOfTouchesRequired = 1;
-        tapGesture.numberOfTapsRequired = 1;
-        tapGesture.cancelsTouchesInView = NO;
-        [self.view addGestureRecognizer:tapGesture];
-        tapGesture.enabled = NO;
-
         // we also need to care about when the keyboard is doing stuff
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -329,24 +303,180 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     self.view = [[UIView alloc] initWithFrame:newFrame];
     self.view.autoresizesSubviews = YES;
     
-    
+    _unloadedFrameMain = self.view.bounds;
     
 }
 
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    // also move some of the self.view stuff from init... into here
+    
+    
+    // here we need to restore any views if they exist.  You should check if they exist first so you know if you have to also add shadow edges, etc.  things that get called in the setter methods.
+    
+    if (self.mainController && !CGRectIsEmpty(_unloadedFrameMain)) {
+        self.mainController.view.frame = _unloadedFrameMain;  // should be self.view.bounds
+        
+        _mainController.view.clipsToBounds = NO;
+        
+        _usesRoundedCorners = NO;
+        self.usesRoundedCorners = YES;
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        pan.delegate = self;
+        [self.view addGestureRecognizer:pan];
+        panGesture = pan;
+        
+        UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        leftSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+        leftSwipe.delegate = self;
+        leftSwipeGesture = leftSwipe;
+        
+        UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        rightSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+        rightSwipe.delegate = self;
+        rightSwipeGesture = rightSwipe;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(tappedMainView:)];
+        tap.delegate = self;
+        tap.numberOfTouchesRequired = 1;
+        tap.numberOfTapsRequired = 1;
+        tap.cancelsTouchesInView = NO;
+        tap.enabled = NO;
+        tapGesture = tap;
+        
+        [self.view addGestureRecognizer:leftSwipeGesture];
+        [self.view addGestureRecognizer:rightSwipeGesture];
+        [self.view addGestureRecognizer:tapGesture];
+        
+        [self.view addSubview: _mainController.view];
+        
+    }
+    
+    if (self.topController && !CGRectIsEmpty(_unloadedFrameTop)) {
+        self.topController.view.frame = _unloadedFrameTop;
+        
+        if (_topEdge == nil) {
+            _topEdge = [[ShadowEdgeView alloc] initWithFrame: CGRectMake(0.0f, -10.0f, self.view.frame.size.width, 10.f)];
+            _topEdge.edgeSide = ViewingPageTop;
+            [_mainController.view insertSubview:_topEdge atIndex:0];
+        }
+        
+        _topController.view.hidden = YES; // we unhide him when we're about to show him.
+        _topEdge.hidden = NO;
+        
+        [self.view insertSubview:self.topController.view belowSubview: _mainController.view];
+        
+    }
+    
+    if (self.leftController && !CGRectIsEmpty(_unloadedFrameLeft)) {
+        self.leftController.view.frame = _unloadedFrameLeft;
+        
+        if (_leftEdge == nil) {
+            _leftEdge = [[ShadowEdgeView alloc] initWithFrame: CGRectMake(-10.0f, 0.0f, 10.f, self.view.frame.size.height)];
+            _leftEdge.edgeSide = ViewingPageLeft;
+            [_mainController.view insertSubview:_leftEdge atIndex:0];
+        }
+        
+        _leftController.view.hidden = YES; // we unhide him when we're about to show him.
+        _leftEdge.hidden = NO;
+
+        
+        [self.view insertSubview:self.leftController.view belowSubview: _mainController.view];
+    }
+    
+    if (self.bottomController && !CGRectIsEmpty(_unloadedFrameBottom)) {
+        self.bottomController.view.frame = _unloadedFrameBottom;
+        
+        if (_bottomEdge == nil) {
+            _bottomEdge = [[ShadowEdgeView alloc] initWithFrame: CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, 10.f)];
+            _bottomEdge.edgeSide = ViewingPageBottom;
+            [_mainController.view insertSubview:_bottomEdge atIndex:0];
+        }
+        
+        _bottomController.view.hidden = YES; // we unhide him when we're about to show him.
+        _bottomEdge.hidden = NO;
+
+        
+        [self.view insertSubview:self.bottomController.view belowSubview: _mainController.view];
+    }
+    
+    if (self.rightController && !CGRectIsEmpty(_unloadedFrameRight)) {
+        self.rightController.view.frame = _unloadedFrameRight;
+        
+        if (_rightEdge == nil) {
+            _rightEdge = [[ShadowEdgeView alloc] initWithFrame: CGRectMake(self.view.frame.size.width, 0.0f, 10.f, self.view.frame.size.height)];
+            _rightEdge.edgeSide = ViewingPageRight;
+            [_mainController.view insertSubview:_rightEdge atIndex:0];
+        }
+        
+        _rightController.view.hidden = YES; // we unhide him when we're about to show him.
+        _rightEdge.hidden = NO;
+        
+        [self.view insertSubview:self.rightController.view belowSubview: _mainController.view];
+        
+    }
+    
+    
+
+    
+    
+    // then set the rects back to zero
+    _unloadedFrameTop = CGRectZero, _unloadedFrameBottom = CGRectZero, _unloadedFrameLeft = CGRectZero, _unloadedFrameRight = CGRectZero;  // except main because it's frame should always be loaded
 }
-*/
+
+
+- (void)viewWillUnload
+{
+   
+    
+    // we save the frames of any view controllers
+    if (self.topController) {
+        _unloadedFrameTop = self.topController.view.frame;
+    }
+    
+    if (self.leftController) {
+        _unloadedFrameLeft = self.leftController.view.frame;
+            
+    }
+    
+    if (self.bottomController) {
+        _unloadedFrameBottom = self.bottomController.view.frame;
+    }
+    
+    if (self.rightController) {
+        _unloadedFrameRight = self.rightController.view.frame;
+        
+        
+    }
+    
+    if (self.mainController) {
+        _unloadedFrameMain = self.mainController.view.frame;
+    }
+    
+     [super viewWillUnload];
+}
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
+    _leftEdge = nil;
+    _rightEdge = nil;
+    _topEdge = nil;
+    _bottomEdge = nil;
+    
+    _topLeft = nil;
+    _topRight = nil;
+    _btmLeft = nil;
+    _btmRight = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

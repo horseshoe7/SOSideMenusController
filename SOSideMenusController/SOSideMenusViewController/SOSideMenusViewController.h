@@ -71,10 +71,14 @@ typedef enum {
     UIViewController *_topController;
     UIViewController *_bottomController;
     
-    UIPanGestureRecognizer *panGesture;
-    UISwipeGestureRecognizer *leftSwipeGesture, *rightSwipeGesture;  // opposite to finger movement, it is the direction you want the content to move.  i.e. viewing the right page involves swiping to the left.
+    __weak UIPanGestureRecognizer *panGesture;  // they get retained by the view, and released by the view
+    __weak UISwipeGestureRecognizer *leftSwipeGesture;
+    __weak UISwipeGestureRecognizer *rightSwipeGesture;  // opposite to finger movement, it is the direction you want the content to move.  i.e. viewing the right page involves swiping to the left.
     
-    UITapGestureRecognizer *tapGesture;  // enabled on the _mainController.view only when viewing another page.
+    __weak UITapGestureRecognizer *tapGesture;  // enabled on the _mainController.view only when viewing another page.
+    
+    // this stuff is for dealing with memory warnings and reloading a view
+    CGRect _unloadedFrameLeft, _unloadedFrameRight, _unloadedFrameTop, _unloadedFrameBottom, _unloadedFrameMain;
     
     @protected
         
