@@ -29,20 +29,20 @@
 
 static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSide) {
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-            
-    UIColor *startColor = [UIColor colorWithRed:0.0 
-                                          green:0.0 
-                                           blue:0.0 
-                                          alpha:0.8]; 
     
-    UIColor *endColor = [UIColor colorWithRed:0.0f     
+    UIColor *startColor = [UIColor colorWithRed:0.0
+                                          green:0.0
+                                           blue:0.0
+                                          alpha:0.8];
+    
+    UIColor *endColor = [UIColor colorWithRed:0.0f
                                         green:0.0f
-                                         blue:0.0f 
+                                         blue:0.0f
                                         alpha:0.0f];
     
     CGColorRef start = CGColorRetain(startColor.CGColor);
     CGColorRef end = CGColorRetain(endColor.CGColor);
-            
+    
     CGColorRef borderGradientColors[] = {
         start,
         end
@@ -53,7 +53,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, colorsArray, borderGradientLocations);
     
     CFRelease(colorsArray);
-        
+    
     
     CGPoint startPoint;  // i.e where the less transparent color should start drawing
     CGPoint endPoint;  // where the full transparent color should end
@@ -74,24 +74,24 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         case ViewingPageRight:
             startPoint = CGPointMake(CGRectGetMinX(rect), CGRectGetMidY(rect));
             endPoint = CGPointMake(CGRectGetMaxX(rect),CGRectGetMidY(rect));
-            break;    
+            break;
         default:
             break;
-    }    
+    }
     
     CGContextSaveGState(context);
-       
+    
     CGContextAddRect(context, rect);
     CGContextClip(context);
     CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
-
+    
     CGContextRestoreGState(context);
     
     CGColorRelease(start);
     CGColorRelease(end);
-
+    
     CGGradientRelease(gradient);
-    CGColorSpaceRelease(colorSpace); 
+    CGColorSpaceRelease(colorSpace);
 }
 
 @interface ShadowEdgeView : UIView {
@@ -150,7 +150,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         parent = [parent parentViewController];
     }
     
-    return sideMenuController;    
+    return sideMenuController;
     
 }
 
@@ -178,6 +178,8 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     
     BOOL _usesRoundedCorners;
     
+    BOOL _canViewLeftController, _canViewRightController, _canViewTopController, _canViewBottomController;
+    
     CGFloat _leftControllerWidth, _rightControllerWidth, _topControllerHeight, _bottomControllerHeight;
     
     
@@ -193,7 +195,8 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
 
 @implementation SOSideMenusViewController
 @synthesize mainController = _mainController;
-@synthesize canViewRightController, canViewLeftController, canViewTopController, canViewBottomController;
+@synthesize canViewRightController = _canViewRightController, canViewLeftController = _canViewLeftController, canViewTopController = _canViewTopController, canViewBottomController = _canViewBottomController;
+
 @synthesize leftControllerWidth = _leftControllerWidth, rightControllerWidth = _rightControllerWidth, topControllerHeight = _topControllerHeight, bottomControllerHeight = _bottomControllerHeight;
 @synthesize elasticity;
 
@@ -239,12 +242,12 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         
         
         _unloadedFrameTop = CGRectZero, _unloadedFrameBottom = CGRectZero, _unloadedFrameLeft = CGRectZero, _unloadedFrameRight = CGRectZero;
-
-                
+        
+        
         self.elasticity = 100.0f;
         
         [_mainController didMoveToParentViewController: self];
-
+        
         
         // we also need to care about when the keyboard is doing stuff
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -268,7 +271,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     rightSwipeGesture.enabled = YES;
     leftSwipeGesture.enabled = YES;
     panGesture.enabled = YES;
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -361,6 +364,8 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     if (self.topController && !CGRectIsEmpty(_unloadedFrameTop)) {
         self.topController.view.frame = _unloadedFrameTop;
         
+        self.canViewTopController = _canViewTopController;
+        
         if (_topEdge == nil) {
             _topEdge = [[ShadowEdgeView alloc] initWithFrame: CGRectMake(0.0f, -10.0f, self.view.frame.size.width, 10.f)];
             _topEdge.edgeSide = ViewingPageTop;
@@ -377,21 +382,25 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     if (self.leftController && !CGRectIsEmpty(_unloadedFrameLeft)) {
         self.leftController.view.frame = _unloadedFrameLeft;
         
+        self.canViewLeftController = _canViewLeftController;
+        
         if (_leftEdge == nil) {
             _leftEdge = [[ShadowEdgeView alloc] initWithFrame: CGRectMake(-10.0f, 0.0f, 10.f, self.view.frame.size.height)];
             _leftEdge.edgeSide = ViewingPageLeft;
             [_mainController.view insertSubview:_leftEdge atIndex:0];
         }
         
-        _leftController.view.hidden = YES; // we unhide him when we're about to show him.
+        _leftController.view.hidden = NO; // we unhide him when we're about to show him.
         _leftEdge.hidden = NO;
-
+        
         
         [self.view insertSubview:self.leftController.view belowSubview: _mainController.view];
     }
     
     if (self.bottomController && !CGRectIsEmpty(_unloadedFrameBottom)) {
         self.bottomController.view.frame = _unloadedFrameBottom;
+        
+        self.canViewBottomController = _canViewBottomController;
         
         if (_bottomEdge == nil) {
             _bottomEdge = [[ShadowEdgeView alloc] initWithFrame: CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, 10.f)];
@@ -401,7 +410,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         
         _bottomController.view.hidden = YES; // we unhide him when we're about to show him.
         _bottomEdge.hidden = NO;
-
+        
         
         [self.view insertSubview:self.bottomController.view belowSubview: _mainController.view];
     }
@@ -409,13 +418,15 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     if (self.rightController && !CGRectIsEmpty(_unloadedFrameRight)) {
         self.rightController.view.frame = _unloadedFrameRight;
         
+        self.canViewRightController = _canViewRightController;
+        
         if (_rightEdge == nil) {
             _rightEdge = [[ShadowEdgeView alloc] initWithFrame: CGRectMake(self.view.frame.size.width, 0.0f, 10.f, self.view.frame.size.height)];
             _rightEdge.edgeSide = ViewingPageRight;
             [_mainController.view insertSubview:_rightEdge atIndex:0];
         }
         
-        _rightController.view.hidden = YES; // we unhide him when we're about to show him.
+        _rightController.view.hidden = NO; // we unhide him when we're about to show him.
         _rightEdge.hidden = NO;
         
         [self.view insertSubview:self.rightController.view belowSubview: _mainController.view];
@@ -423,7 +434,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     }
     
     
-
+    
     
     
     // then set the rects back to zero
@@ -433,7 +444,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
 
 - (void)viewWillUnload
 {
-   
+    
     
     // we save the frames of any view controllers
     if (self.topController) {
@@ -442,7 +453,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     
     if (self.leftController) {
         _unloadedFrameLeft = self.leftController.view.frame;
-            
+        
     }
     
     if (self.bottomController) {
@@ -459,7 +470,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         _unloadedFrameMain = self.mainController.view.frame;
     }
     
-     [super viewWillUnload];
+    [super viewWillUnload];
 }
 
 - (void)viewDidUnload
@@ -498,19 +509,19 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         _btmLeft = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"corner-bottom-left.png"]];
         _btmRight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"corner-bottom-right.png"]];
         
-        _topRight.frame = CGRectMake(_mainController.view.frame.size.width - _topRight.frame.size.width, 
-                                     0, 
-                                     _topRight.frame.size.width, 
+        _topRight.frame = CGRectMake(_mainController.view.frame.size.width - _topRight.frame.size.width,
+                                     0,
+                                     _topRight.frame.size.width,
                                      _topRight.frame.size.height);
         
-        _btmLeft.frame = CGRectMake( 0, 
-                                    _mainController.view.frame.size.height - _btmLeft.frame.size.height, 
-                                    _btmLeft.frame.size.width, 
+        _btmLeft.frame = CGRectMake( 0,
+                                    _mainController.view.frame.size.height - _btmLeft.frame.size.height,
+                                    _btmLeft.frame.size.width,
                                     _btmLeft.frame.size.height);
         
-        _btmRight.frame = CGRectMake( _mainController.view.frame.size.width - _btmRight.frame.size.width, 
-                                     _mainController.view.frame.size.height - _btmRight.frame.size.height, 
-                                     _btmRight.frame.size.width, 
+        _btmRight.frame = CGRectMake( _mainController.view.frame.size.width - _btmRight.frame.size.width,
+                                     _mainController.view.frame.size.height - _btmRight.frame.size.height,
+                                     _btmRight.frame.size.width,
                                      _btmRight.frame.size.height);
         
         _topLeft.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
@@ -521,7 +532,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         [_mainController.view addSubview: _topLeft];
         [_mainController.view addSubview: _topRight];
         [_mainController.view addSubview: _btmLeft];
-        [_mainController.view addSubview: _btmRight];        
+        [_mainController.view addSubview: _btmRight];
     }
     else if (usesRoundedCorners == NO && _usesRoundedCorners){
         [_topLeft removeFromSuperview];
@@ -558,11 +569,11 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         _leftController = nil;
         
     }
-
+    
     if (aController) {
         
         _leftController = aController;
-        [_leftController willMoveToParentViewController:self];        
+        [_leftController willMoveToParentViewController:self];
         [self addChildViewController:aController];
         
         _leftControllerWidth = _leftController.view.frame.size.width;
@@ -589,7 +600,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     else
     {  // was nil
         self.canViewLeftController = NO;
-        _leftControllerWidth = 0.0f;  
+        _leftControllerWidth = 0.0f;
         [_leftEdge removeFromSuperview];
         _leftEdge = nil;
     }
@@ -609,9 +620,9 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     
     if (aController) {
         _rightController = aController;
-        [_rightController willMoveToParentViewController:self];        
+        [_rightController willMoveToParentViewController:self];
         [self addChildViewController:aController];
-
+        
         _rightControllerWidth = _rightController.view.frame.size.width;
         
         CGRect newFrame = self.view.bounds;
@@ -656,7 +667,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     
     if (aController) {
         _topController = aController;
-        [_topController willMoveToParentViewController:self];        
+        [_topController willMoveToParentViewController:self];
         [self addChildViewController:aController];
         
         _topControllerHeight = _topController.view.frame.size.height;
@@ -702,7 +713,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     
     if (aController) {
         _bottomController = aController;
-        [_bottomController willMoveToParentViewController:self];        
+        [_bottomController willMoveToParentViewController:self];
         [self addChildViewController:aController];
         
         _bottomControllerHeight = _bottomController.view.frame.size.height;
@@ -772,7 +783,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
 
 - (void)showMainControllerWithCompletionBlock:(void(^)(SOSideMenusViewController *controller, ViewingPage fromPage, ViewingPage toPage))completionBlock
 {
-    [self moveToPage:ViewingPageCenter duration:0.4f bounces:YES completionBlock:completionBlock];    
+    [self moveToPage:ViewingPageCenter duration:0.4f bounces:YES completionBlock:completionBlock];
 }
 
 
@@ -787,7 +798,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
 }
 
 // you call this method at the end of a handlePan:, handleSwipe: and show...Controller.
-- (void)moveToPage:(ViewingPage)toPage 
+- (void)moveToPage:(ViewingPage)toPage
           duration:(NSTimeInterval)duration
            bounces:(BOOL)bounces
    completionBlock:(void(^)(SOSideMenusViewController*, ViewingPage, ViewingPage))completionBlock
@@ -795,7 +806,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     
     CGRect finalRect = self.view.bounds;  // would be for the center page.
     CGPoint bouncePoint;  // intermediate point if bouncing.
-        
+    
     // need to set the finalRect of the _mainController, and also set the layer.hidden properties, as well as the currentPage.  Need to disable interaction during animation
     
     
@@ -817,9 +828,9 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
             _rightController.view.hidden = YES;
             _topController.view.hidden = YES;
             _bottomController.view.hidden = YES;
-
+            
             break;
-        
+            
         case ViewingPageRight:
             finalRect.origin = CGPointMake(-_rightControllerWidth, 0.0f);
             bouncePoint = CGPointMake(-_rightControllerWidth - kBounceDistance , 0.0f);
@@ -827,9 +838,9 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
             _rightController.view.hidden = NO;
             _topController.view.hidden = YES;
             _bottomController.view.hidden = YES;
-
+            
             break;
-        
+            
         case ViewingPageTop:
             finalRect.origin = CGPointMake(0.0f, _topControllerHeight);
             bouncePoint = CGPointMake(0.0f, _topControllerHeight + kBounceDistance);
@@ -837,7 +848,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
             _rightController.view.hidden = YES;
             _leftController.view.hidden = YES;
             _bottomController.view.hidden = YES;
-
+            
             break;
             
         case ViewingPageBottom:
@@ -847,7 +858,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
             _rightController.view.hidden = YES;
             _leftController.view.hidden = YES;
             _bottomController.view.hidden = NO;
-            break;    
+            break;
             
             
         default:
@@ -858,19 +869,19 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         CGRect bounceRect = finalRect;
         bounceRect.origin = bouncePoint;
         
-        [UIView animateWithDuration:duration*2.0f/4.0f 
-                              delay:0.0f 
-                            options:UIViewAnimationOptionCurveEaseOut 
+        [UIView animateWithDuration:duration*2.0f/4.0f
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              _mainController.view.frame = bounceRect;
-                         } 
+                         }
                          completion:^(BOOL finished) {
-                             [UIView animateWithDuration:duration/2.0f 
-                                                   delay:0.0f 
+                             [UIView animateWithDuration:duration/2.0f
+                                                   delay:0.0f
                                                  options:UIViewAnimationOptionCurveEaseInOut
                                               animations:^{
                                                   _mainController.view.frame = finalRect;
-                                              } 
+                                              }
                                               completion:^(BOOL finished) {
                                                   
                                                   if (toPage == ViewingPageCenter) {
@@ -879,8 +890,8 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
                                                       _topController.view.hidden = YES;
                                                       _bottomController.view.hidden = YES;
                                                       tapGesture.enabled = NO;
-                                                    
-                                                      _mainController.view.userInteractionEnabled = YES;  
+                                                      
+                                                      _mainController.view.userInteractionEnabled = YES;
                                                   }
                                                   else
                                                   {
@@ -905,7 +916,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
                                                       completionBlock(self, currentPage, toPage);
                                                   
                                                   currentPage = toPage;
-
+                                                  
                                               }
                               ];
                          }
@@ -913,15 +924,15 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
     }
     else
     {
-        [UIView animateWithDuration:duration 
-                              delay:0.0f 
-                            options:UIViewAnimationOptionCurveEaseInOut 
+        [UIView animateWithDuration:duration
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
                              _mainController.view.frame = finalRect;
-                         } 
+                         }
                          completion:^(BOOL finished) {
                              
-                                                          
+                             
                              if (toPage == ViewingPageCenter) {
                                  _rightController.view.hidden = YES;
                                  _leftController.view.hidden = YES;
@@ -952,7 +963,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
                                  completionBlock(self, currentPage, toPage);
                              
                              currentPage = toPage;
-
+                             
                          }
          ];
     }
@@ -961,7 +972,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
 #pragma mark Gesture Recognizer Handlers
 - (void)tappedMainView:(UITapGestureRecognizer*)recognizer
 {
-    // have to check if the tap's location is inside of the _mainController.view 
+    // have to check if the tap's location is inside of the _mainController.view
     CGRect intersection = CGRectIntersection(self.view.bounds, _mainController.view.frame);
     
     BOOL tappedInsideMainController = CGRectContainsPoint(intersection, [recognizer locationInView: self.view]);
@@ -1080,7 +1091,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
                 break;
                 
             case ViewingPageCenter:
-                if (self.canViewLeftController) 
+                if (self.canViewLeftController)
                     [self moveToPage:ViewingPageLeft duration:0.3f];
                 
                 // else do nothing
@@ -1094,7 +1105,7 @@ static void drawShadowEdge(CGContextRef context, CGRect rect, ViewingPage edgeSi
         
     }
     else if (aRecognizer == rightSwipeGesture)
-    {        
+    {
         switch (currentPage) {
             case ViewingPageLeft:
                 [self moveToPage:ViewingPageCenter duration:0.3f];
